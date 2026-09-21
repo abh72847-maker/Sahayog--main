@@ -34,6 +34,26 @@ app.use(cors({
 }));
 app.use(express.json());
 
+// Root Welcome & Status
+app.get('/', (req, res) => {
+  res.json({
+    platform: 'Sahayog Gig-Worker Cooperative Platform API',
+    status: 'online',
+    version: '2.0.0',
+    documentation: {
+      health: '/api/health',
+      services: '/api/services',
+      providers: '/api/providers',
+      stats: '/api/admin/stats',
+      sheets: {
+        users: '/api/sheets/download/user_accounts.csv',
+        revenue: '/api/sheets/download/workers_revenue.csv',
+        bookings: '/api/sheets/download/schedule_bookings.csv',
+      }
+    }
+  });
+});
+
 // API Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/services', serviceRoutes);
